@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <!-- Разметка для создания календаря на неделю -->
     <div id="calendar-week" class="container">
       <div class="columns is-mobile">
         <div class="day column">
@@ -62,6 +63,7 @@
         </div>
       </div>
     </div>
+    <!-- Разметка для окна добавления события в календарь -->
     <div id="calendar-entry">
       <div class="calendar-entry-note">
         <input type="text" placeholder="New Event" />
