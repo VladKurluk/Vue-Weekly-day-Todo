@@ -65,9 +65,20 @@
 </template>
 
 <script>
+/* Импортирую данные и компонент для одного дня */
+import {store} from '../store.js';
+import CalendarDay from './CalendarDay.vue';
 /* Експортируем данный компонент */
 export default {
-    name: 'CalendarWeek'
+    name: 'CalendarWeek',
+    data() {
+      return {
+        sharedState: store.state
+      }
+    },
+    components: {
+      CalendarDay
+    }
 }
 </script>
 
