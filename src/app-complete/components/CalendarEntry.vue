@@ -3,16 +3,23 @@
     <div id="calendar-entry">
       <div class="calendar-entry-note">
         <input type="text" placeholder="New Event" />
-        <p class="calendar-entry-day">Day of event: <span class="bold">Monday</span></p>
+        <p class="calendar-entry-day">Day of event: <span class="bold">{{ titleOfActiveDay }}</span></p>
         <a class="button is-primary is-small is-outlined">Submit</a>
       </div>
     </div>
 </template>
 
 <script>
+/* Импортируем объект хранилище */
+import { store } from '../store.js';
 /* Експортируем данный компонент */
 export default {
-    name: 'CalendarEntry'
+    name: 'CalendarEntry',
+    computed: {
+      titleOfActiveDay () {
+        return store.getActiveDay().fullTitle;
+      }
+    }
 }
 </script>
 
