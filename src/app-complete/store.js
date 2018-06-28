@@ -19,6 +19,25 @@ export const store = {
     submitEvent(eventDetails) {
         const activeDay = this.getActiveDay();
         activeDay.events.push({ "details": eventDetails, "edit": false });
+    },
+    /* Метод редактирования события  */
+    editEvent (dayId, eventDetails) {
+        this.resetEditOfAllEvents();
+        const dayObj = this.state.seedData.find(
+            day => day.id === dayId
+        );
+        const eventObj = dayObj.events.find(
+            event => event.details === eventDetails
+        );
+        eventObj.edit = true;
+    },
+    /* Метод который предотвращает одновременный выбор редактирования всех существующих событий */
+    resetEditOfAllEvents () {
+        this.state.seedData.map((dayObj) => {
+            dayObj.events.map((event) => {
+                event.edit = false;
+            });
+        });
     }
 }
 
