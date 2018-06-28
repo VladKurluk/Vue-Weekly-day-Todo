@@ -2,9 +2,9 @@
     <!-- Разметка для окна добавления события в календарь -->
     <div id="calendar-entry">
       <div class="calendar-entry-note">
-        <input type="text" placeholder="New Event" />
+        <input type="text" v-model="inputEntry" placeholder="New Event" required/>
         <p class="calendar-entry-day">Day of event: <span class="bold">{{ titleOfActiveDay }}</span></p>
-        <a class="button is-primary is-small is-outlined">Submit</a>
+        <a class="button is-primary is-small is-outlined" @click="submitEvent(inputEntry)">Submit</a>
       </div>
     </div>
 </template>
@@ -15,9 +15,20 @@ import { store } from '../store.js';
 /* Експортируем данный компонент */
 export default {
     name: 'CalendarEntry',
+    data() {
+      return {
+        inputEntry: ''
+      }
+    },
     computed: {
       titleOfActiveDay () {
         return store.getActiveDay().fullTitle;
+      }
+    },
+    methods: {
+      submitEvent (eventDetails) {
+        store.submitEvent(eventDetails);
+        this.inputEntry = '';
       }
     }
 }
