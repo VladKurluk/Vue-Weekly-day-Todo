@@ -33,6 +33,11 @@ export default {
   methods: {
     editEvent (dayId, eventDetails) {
       store.editEvent(dayId, eventDetails);
+    },
+    uupdateEvent (dayId, originalEventDetails, updatedEventDetails) {
+      if (updatedEventDetails === '') updatedEventDetails = originalEventDetails;
+        store.updateEvent(dayId, originalEventDetails, updatedEventDetails);
+        this.newEventDetails = '';
     }
   },
   data () {
