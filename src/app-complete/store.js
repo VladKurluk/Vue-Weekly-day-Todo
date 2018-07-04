@@ -23,12 +23,7 @@ export const store = {
     /* Метод редактирования события  */
     editEvent (dayId, eventDetails) {
         this.resetEditOfAllEvents();
-        const dayObj = this.state.seedData.find(
-            day => day.id === dayId
-        );
-        const eventObj = dayObj.events.find(
-            event => event.details === eventDetails
-        );
+        const eventObj = this.getEventObj(dayId, eventDetails);
         eventObj.edit = true;
     },
     /* Метод который предотвращает одновременный выбор редактирования всех существующих событий */
@@ -41,17 +36,20 @@ export const store = {
     },
     // Метод который обновляет данные о событии в хранилище 
     updateEvent (dayId, originalEventDetails, newEventDetails) {
-        // Находим объект конкретного дня
-        const dayObj = this.state.seedData.find(
-            day => day.id === dayId
-        );
-        // Найходим конкретное событие
-        const eventObj = dayObj.events.find(
-            event => event.details === originalEventDetails
-        );
+        const eventObj = this.getEventObj(dayId, originalEventDetails);
+        
         // Заменяю детали события новыми данными события и выхожу из режима редактирования
         eventObj.details = newEventDetails;
         eventObj.edit = false;
+    },
+    //Добавил вспомагательный метод для D.R.Y
+    getEventObj (dayId, eventDetails) {
+        const dayObj = this.state.seedData.find(
+            day => day.id === dayId
+        );
+        return dayObj.events.find(
+            event => event.details === eventDetails
+        );
     }
 }
 
