@@ -37,7 +37,7 @@ export const store = {
     // Метод который обновляет данные о событии в хранилище 
     updateEvent (dayId, originalEventDetails, newEventDetails) {
         const eventObj = this.getEventObj(dayId, originalEventDetails);
-        
+
         // Заменяю детали события новыми данными события и выхожу из режима редактирования
         eventObj.details = newEventDetails;
         eventObj.edit = false;
@@ -50,6 +50,16 @@ export const store = {
         return dayObj.events.find(
             event => event.details === eventDetails
         );
+    },
+    // Метод удаления события из хранилища
+    deleteEvent (dayId, eventDetails) {
+        const dayObj = this.state.seedData.find(
+            day => day.id === dayId
+        );
+        const eventIndexToRemove = dayObj.events.findIndex(
+            event => event.details === eventDetails
+        );
+        dayObj.events.splice(eventIndexToRemove, 1);
     }
 }
 
