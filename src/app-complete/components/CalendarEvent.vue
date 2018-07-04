@@ -34,7 +34,7 @@ export default {
     editEvent (dayId, eventDetails) {
       store.editEvent(dayId, eventDetails);
     },
-    uupdateEvent (dayId, originalEventDetails, updatedEventDetails) {
+    updateEvent (dayId, originalEventDetails, updatedEventDetails) {
       if (updatedEventDetails === '') updatedEventDetails = originalEventDetails;
         store.updateEvent(dayId, originalEventDetails, updatedEventDetails);
         this.newEventDetails = '';

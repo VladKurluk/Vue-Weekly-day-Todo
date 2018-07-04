@@ -38,6 +38,20 @@ export const store = {
                 event.edit = false;
             });
         });
+    },
+    // Метод который обновляет данные о событии в хранилище 
+    updateEvent (dayId, originalEventDetails, newEventDetails) {
+        // Находим объект конкретного дня
+        const dayObj = this.state.seedData.find(
+            day => day.id === dayId
+        );
+        // Найходим конкретное событие
+        const eventObj = dayObj.events.find(
+            event => event.details === originalEventDetails
+        );
+        // Заменяю детали события новыми данными события и выхожу из режима редактирования
+        eventObj.details = newEventDetails;
+        eventObj.edit = false;
     }
 }
 
